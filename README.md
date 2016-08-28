@@ -1,4 +1,26 @@
 # TechTests
+
+## Important:
+
+A note to all the pools partipating in SourceCode, Takneek 2016:
+
+You may see the available milestones with their points in ISSUES
+-> MILESTONES i.e. [Here](https://github.com/pclubiitk/TechTests/milestones)
+
+Please note that the milestones may be updated (adding clarifications,
+increasing points on unsolved issues) without prior notification.
+More milestones will be added to the list as the event progresses, so please
+stay up to date. We will announce these updates on our IRC channel, details of
+which have been mentioned below.
+
+For any doubts, you should make a github issue. You may also connect with us
+at `#pclub-takneek16` or send a private message on IRC to `pallav`, `kunalkap` or `saksham`.
+(although this is not recommended). You may email us at `pclubiitk@gmail.com`.
+Trying any other means of communication would lead to negative points being
+awarded to that pool.
+
+## Description
+
 An online portal to conduct technical tests with a variety of problem types.
 
 This is a portal that can be used to conduct online tests on programming
