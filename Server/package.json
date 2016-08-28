@@ -7,19 +7,23 @@
     "npm": ">= 1.2.0"
   },
   "dependencies": {
-    "express": "4.12.4",
     "body-parser": "1.13.1",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "*",
-    "passport": "*",
-    "express-session": "*",
     "debug": "~2.2.0",
-    "morgan": "~1.6.1",
-    "require-dir": "*",
     "eslint": "*",
+    "express": "4.12.4",
+    "express-session": "*",
+    "ftp": "^0.3.10",
+    "mongoose": "^4.5.10",
+    "morgan": "~1.6.1",
+    "passport": "*",
+    "passport-local": "^1.0.0",
+    "require-dir": "*",
     "winston": "*"
   },
-  "scripts":{
-	  "start": "node app.js"
+  "scripts": {
+    "start": "node app.js"
   },
   "main": "app.js",
   "license": "GPLv3"
