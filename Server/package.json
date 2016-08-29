@@ -11,6 +11,7 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "*",
     "debug": "~2.2.0",
+    "ejs": "^2.5.1",
     "eslint": "*",
     "express": "4.12.4",
     "express-session": "*",

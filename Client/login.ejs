@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+
+  <style>
+  header {
+    font-size:2em;
+    text-align: center;
+    margin: 50px auto 50px auto;
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="row">
+      TechTests Login
+    </header>
+    <main>
+      <form name="loginForm" id="loginForm" action="/login" method="POST">
+        <div class="row">
+          <div class="col s6 offset-s3">
+            <label for="email">CC Email: <input type="email" class="validate" name="email" id="email"></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6 offset-s3">
+            <label for="password">CC Password: <input type="password" name="password" id="password"></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6 offset-s3">
+            <input type="submit" value="Login" class="btn waves-effect waves-light">
+          </div>
+        </div>
+      </form>
+    </main>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    <script>
+    //If flashmessage exists:
+    var flashmessage = "<%= message %>";
+    $(function() {
+      if(flashmessage!="" && flashmessage)
+        Materialize.toast(flashmessage, 8000);
+    });
+    </script>
+  </div>
+</body>
+</html>

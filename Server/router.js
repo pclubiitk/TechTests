@@ -12,14 +12,20 @@ router.get('/', controllers.redirect.loginRedirect);
 
 // Login Page
 router.get('/login', function(req, res) {
-    // TODO: make a frontend and display req.flash('loginmsg') alongwith login form
-    res.send(req.flash('loginmsg'));
+    var message = req.flash('loginmsg');
+    if(message.length==0) message = [''];
+    console.log(message);
+    res.render('login.ejs', {
+       message: message[0]
+    });
 });
 
 // Profile Page
 router.get('/profile', controllers.login.checkAuth, function(req, res) {
-    // TODO: Redirect to profile page with user data
-    res.send( "Hello " + req.user.username );
+    res.render('profile.ejs', {
+      username: req.user.username,
+      access: req.user.access
+    });
 });
 
 // Logout
