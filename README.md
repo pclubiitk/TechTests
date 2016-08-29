@@ -2,10 +2,11 @@
 
 ## Important:
 
-A note to all the pools partipating in SourceCode, Takneek 2016:
+### A note to all the pools partipating in SourceCode, Takneek 2016:
 
-You may see the available milestones with their points in ISSUES
--> MILESTONES i.e. [Here](https://github.com/pclubiitk/TechTests/milestones)
+### You may see the available milestones with their points in ISSUES -> MILESTONES i.e. [Here](https://github.com/pclubiitk/TechTests/milestones)
+
+### Press the watch button on the top to be notified of any changes to this repository!
 
 Please note that the milestones may be updated (adding clarifications,
 increasing points on unsolved issues) without prior notification.
