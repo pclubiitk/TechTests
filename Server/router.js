@@ -12,8 +12,7 @@ router.get('/', controllers.redirect.loginRedirect);
 
 // Login Page
 router.get('/login', function(req, res) {
-    // TODO: make a frontend and display req.flash('loginmsg') alongwith login form
-    res.send(req.flash('loginmsg'));
+    res.send('login',req.flash('loginmsg'));
 });
 
 // Profile Page
