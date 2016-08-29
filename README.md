@@ -1,12 +1,17 @@
 # TechTests
 
-## Important:
+## Important: A note to all the pools partipating in SourceCode, Takneek 2016:
+## Make sure you read this carefully before proceeding
 
-### A note to all the pools partipating in SourceCode, Takneek 2016:
-
-### You may see the available milestones with their points in ISSUES -> MILESTONES i.e. [Here](https://github.com/pclubiitk/TechTests/milestones)
-
-### Press the watch button on the top to be notified of any changes to this repository!
+- You may see the available milestones with their points [Here](https://github.com/pclubiitk/TechTests/milestones)
+- Contacting the coordinators may be done through IRC, via #pclub-takneek16 channel on freenode
+- You can turn on notifications for this repository using the watch button on top
+- After adding the pull request, commits for minor bug fixes/typos are OK, working on a feature after adding the pull request is not.
+- If another person has already made a pull request for something that needs integration into your feature, merge his/her commit into yours and continue. Do not try to reinvent the wheel, even if the other person is from a different pool (you may end up losing your pull request and points due to this).
+- We are using IRC and not slack because our aim is to help you learn what to expect when contributing to open source, and IRC is a lot more used with that (slack is NOT open source)
+- You can only view IRC messages which are sent while you are logged in. Remember that.
+- Any clarification about the milestones should be asked in GitHub issues, so that it may benefit everyone. Code plagiarism will be penalised. So make sure you inform the use of code from other sources.
+- Upto 20% bonus marks may be given if documentation of the source code is included. The exact bonus marks will be decided on the basis of quality of documentation.
 
 Please note that the milestones may be updated (adding clarifications,
 increasing points on unsolved issues) without prior notification.
