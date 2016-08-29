@@ -22,7 +22,7 @@ module.exports = function(passport) {
         });
     });
 
-    // Definning a strategy for authentication and login
+    // Defining a strategy for authentication and login
     passport.use('local-signin', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
