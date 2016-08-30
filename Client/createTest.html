@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="projectFonts/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -190,31 +189,27 @@
                     var myString = longString + noOfMultiOptions + longString1 + "" + noOfMultiOptions + "" + longString2 + noOfMultiOptions + longString3;
                     document.getElementById("MultiOptHolder").innerHTML += myString;
                 });
-                $("#AddQuestionToList").click(funtion() {
-                    // adding question to list of questions for test
-
-                });
             });
             function choosePara() {
                 document.getElementById("currentChoice").innerHTML = "Paragraph";
                 document.getElementById("ParagraphTypeDiv").className = "col-sm-9 collapse in";
                 document.getElementById("SingleCorrectDiv").className = "col-sm-9 collapse";
                 document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse";
-                qnType = 0;
+                // qnType = 0;
             }
             function chooseMCQ() {
                 document.getElementById("currentChoice").innerHTML = "Single Correct";
                 document.getElementById("ParagraphTypeDiv").className = "col-sm-9 collapse";
                 document.getElementById("SingleCorrectDiv").className = "col-sm-9 collapse in";
                 document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse";
-                qnType = 1;
+                // qnType = 1;
             }
             function chooseMulti() {
                 document.getElementById("currentChoice").innerHTML = "Multiple Correct";
                 document.getElementById("ParagraphTypeDiv").className = "col-sm-9 collapse";
                 document.getElementById("SingleCorrectDiv").className = "col-sm-9 collapse";
                 document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse in";
-                qnTpye = 2;
+                // qnType = 2;
             }
 
         </script>
