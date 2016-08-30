@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <style>
+  header {
+    font-size:2em;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  .strong {
+    font-weight: bold;
+  }
+  </style>
+  <script type="text/javascript" src="js/Question.js"></script>
+  <script>
+  var questions = []; //Will store the list of all questions in the end.
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="row">TechTests Create a Test</div>
+    </header>
+    <div class="row">
+      <main>
+        <div id="createdQuestions">
+          <ul id="qList" class="collapsible">
+
+          </ul>
+          </div>
+          <div class="center">
+            <a id="createQuestion" href="#createQModal" class="waves-effect waves-light btn modal-trigger">Create a Question</a>
+            <a id="doneWith" class="waves-effect waves-dark blue btn modal-trigger">Done Making Quiz</a>
+          </div>
+          <div id="createQModal" class="modal">
+            <div class="modal-content">
+              <h4>Question Editor</h4>
+              <form name="questionCreator" id="questionCreator">
+                <div class="input-field col s6">
+                  <select name="questionType" id="questionType">
+                    <option value="singleans">Single Answer</option>
+                    <option value="multians">Multiple Answer</option>
+                    <option value="subjective">Subjective</option>
+                    <option value="codebased">Code Based</option>
+                    <label>Type</label>
+                  </select>
+                </div>
+                <div class="col s6 input-field center" id="optionAdditionPanel">
+                  <input name="optionAddition" type="checkbox" id="optionAddition" />
+                  <label for="optionAddition">Can options be added?</label>
+                </div>
+                <div class="input-field col s12">
+                  <textarea id="questionStatement" name="questionStatement" class="materialize-textarea"></textarea>
+                  <label for="questionStatement">Question</label>
+                </div>
+                <div class="input-field col s12">
+                  <ul class="collection with-header" id="optionList">
+                    <li class="collection-header">Options</li>
+                  </ul>
+                </div>
+                <div class="col s12">
+                  <input type="text" id="newOption" name="newOption" placeholder="Add Option (Press Enter to Add)">
+                </div>
+                <div class="col s12 center">
+                  <a class="waves-effect waves-light btn" id="addButton">Add Question</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </main>
+      </div>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+      <script>
+      $(document).ready(function(){
+        $('.modal-trigger').leanModal();
+      });
+
+      $(document).ready(function() {
+        $('select').material_select();
+      });
+
+      function updateQList(q) {
+        //q is a question
+        var title = q.statement;
+        if(title.length>80) title = title.slice(0,80);
+        var qLi = document.createElement("li");
+        var colHeader = document.createElement("div")
+        colHeader.className = "collapsible-header strong center";
+        colHeader.appendChild(document.createTextNode(title));
+        //Now append the "delete question" thing
+        var deletingLink = document.createElement("a");
+        deletingLink.className = "secondary-content";
+        deletingLink.appendChild(document.createTextNode("delete"));
+        colHeader.appendChild(deletingLink);
+
+        qLi.appendChild(colHeader);
+        var colBody = document.createElement("div");
+        colBody.className = "collapsible-body row";
+        //TODO cleanup here. Correct, but messy.
+        var leftDiv = document.createElement("div");
+        leftDiv.className = "strong col s2 center";
+        leftDiv.appendChild(document.createTextNode("Statement:"));
+        colBody.appendChild(leftDiv);
+        var rightDiv = document.createElement("div");
+        rightDiv.className = "col s10";
+        rightDiv.appendChild(document.createTextNode(q.statement));
+        colBody.appendChild(rightDiv);
+
+        var leftDiv = document.createElement("div");
+        leftDiv.className = "strong col s2 center";
+        leftDiv.appendChild(document.createTextNode("Type:"));
+        colBody.appendChild(leftDiv);
+        var rightDiv = document.createElement("div");
+        rightDiv.className = "col s10";
+        rightDiv.appendChild(document.createTextNode(q.getType()));
+        colBody.appendChild(rightDiv);
+
+        if(q.alternatives) {
+          var leftDiv = document.createElement("div");
+          leftDiv.className = "strong col s2 center";
+          leftDiv.appendChild(document.createTextNode("Options:"));
+          colBody.appendChild(leftDiv);
+          var rightDiv = document.createElement("div");
+          rightDiv.className = "col s10";
+          var ul = document.createElement("ul");
+          for(var i=0; i!=q.alternatives.length; i++) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(q.alternatives[i]));
+            ul.appendChild(li);
+          }
+          if(q.alteradd) {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode("(User Added Option(s))"));
+            ul.appendChild(li);
+          }
+          rightDiv.appendChild(ul);
+          colBody.appendChild(rightDiv);
+        }
+        qLi.appendChild(colBody);
+
+        deletingLink.onclick = function() {
+          deletingLink.parentNode.parentNode.removeChild(deletingLink.parentNode);
+          //Also need to remove the offending question from the array of all questions
+          questions.remove(q);
+        };
+        document.getElementById("qList").appendChild(qLi);
+      }
+
+      document.body.onload = function() {
+        document.getElementById("questionType").onchange = function() {
+          var newVal = document.getElementById("questionType").value;
+          if(newVal!="singleans" && newVal!="multians") {
+            document.getElementById("optionAdditionPanel").style.display = "none";
+            document.getElementById("newOption").style.display = "none";
+            document.getElementById("optionList").style.display = "none";
+          } else {
+            document.getElementById("optionAdditionPanel").style.display = "";
+            document.getElementById("newOption").style.display = "";
+            document.getElementById("optionList").style.display = "";
+          }
+        };
+        document.getElementById("addButton").onclick = function() {
+          //Need to sanitize Modal and save the question as a question object in my model
+          $("#createQModal").closeModal();
+          //Saving
+          //Question()
+          var statement = document.getElementById("questionStatement").value;
+          document.getElementById("questionStatement").value = "";
+          var qtype = document.getElementById("questionType").value;
+          document.getElementById("questionType").value = "singleans";
+          $('select').material_select();
+          var alternatives = [];
+          var lis = document.getElementsByTagName("li");
+          for(var i=0; i!= lis.length; i++) {
+            if(lis[i].className == "collection-item" && lis[i].parentNode.id == "optionList") {
+              alternatives.push(lis[i].innerHTML.split("<a")[0]); //TODO: fix this. Use firstChild
+            }
+          }
+          for(var i=0; i!= lis.length; i++) {
+            if(lis[lis.length-1].className == "collection-item" && lis[lis.length-1].parentNode.id == "optionList") {
+              lis[lis.length-1].parentNode.removeChild(lis[lis.length-1]);
+            }
+          }
+          var alteradd = document.getElementById("optionAddition").checked;
+          document.getElementById("optionAddition").checked = false;
+          var ques = new Question(statement, qtype, alternatives, alteradd);
+          questions.push(ques);
+          updateQList(ques);
+          // alert(JSON.stringify(ques));
+
+
+        };
+        document.getElementById("newOption").onkeypress = function(e) {
+          var keynum=null;
+          if(window.event) {
+            keynum = e.keyCode;
+          } else if(e.which) {
+            keynum = e.which;
+          }
+          if(keynum!=13) return; //Check if keypressed is "Enter". If not, exit.
+          var q = document.getElementById("newOption");
+          var op = document.createElement("li");
+          var removal = document.createElement("a");
+          removal.className = "secondary-content";
+          removal.href = "#!";
+          removal.onclick = function() {
+            op.parentNode.removeChild(op);
+          };
+          removal.appendChild(document.createTextNode("remove"));
+          op.className = "collection-item";
+          op.appendChild(document.createTextNode(q.value));
+          op.appendChild(removal);
+          document.getElementById("optionList").appendChild(op);
+          q.value="";
+        };
+        document.getElementById("doneWith").onclick = function() {
+          alert(JSON.stringify(questions));
+        };
+        $(document).click(function(event) {
+          var text = $(event.target);
+          console.log(text);
+        });
+      };
+
+
+      </script>
+    </div>
+  </body>
+  </html>
