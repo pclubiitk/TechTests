@@ -73,23 +73,27 @@ func main() {
 		_,err := exec.LookPath(args[0])
 		if (err != nil){
 			writeToOutput([]byte("**No such command found**"),file3)
+		} else {
+			cmd := exec.Command(args[0],strings.Join(args[1:]," "))
+	//		stdout,err := cmd.StdoutPipe()
+			notDone := true
+			cmd.Start()
+			timer := time.AfterFunc(1*time.Second, func() {
+				errr := cmd.Process.Kill()
+				check(errr) // crashes the wrapper if it can not kill the process
+				writeToOutput([]byte("**Took too long to execute**"),file3)
+				notDone = false
+			})
+			err = cmd.Wait()
+			timer.Stop()
+			if err != nil && notDone {
+				writeToOutput([]byte(err.Error()),file3)
+			} else if notDone {
+				cmdd := exec.Command(args[0],strings.Join(args[1:]," "))
+				output,err = cmdd.Output()
+				writeToOutput(output,file3)
+			}
 		}
-		cmd := exec.Command(args[0],strings.Join(args[1:]," "))
-//		stdout,err := cmd.StdoutPipe()
-		cmd.Start()
-		timer := time.AfterFunc(1*time.Second, func() {
-			errr := cmd.Process.Kill()
-			check(errr) // crashes the wrapper if it can not kill the process
-			writeToOutput([]byte("**Took too long to execute**"),file3)
-		})
-		err = cmd.Wait()
-		timer.Stop()
-		if err != nil {
-			writeToOutput([]byte("**Error at the time of execution**"),file3)
-		}
-		cmdd := exec.Command(args[0],strings.Join(args[1:]," "))
-		output,err = cmdd.Output()
-		writeToOutput(output,file3)
 	}
 	fmt.Println(string(output)) // last output
 	f.Close()
