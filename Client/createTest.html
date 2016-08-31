@@ -7,23 +7,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <style type="text/css">
-            body {
-              /* Margin bottom by footer height */
-                margin-bottom: 60px;
-            }
-            .footer {
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                /* Set the fixed height of the footer here */
-                height: 60px;
-                background-color: #f5f5f5;
-            }
-            .footer-para {
-                margin: 20px 0;
-            }
-        </style>
+        <style type="text/css" href="css/main.css"></style>
     </head>
     <body>
         <div class="page-header">
@@ -77,25 +61,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-9 collapse in" id="SingleCorrectDiv">
+                                <div class="col-sm-9 collapse in" id="OptionsDiv">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <div class="container-fluid" id="SingleOptHolder">
-                                                <div class="row" id="SingleOpt1">
-                                                    <div class="col-sm-1">
-                                                        1.
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="currentInputSingle1" class="form-control" placeholder="Option">
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <button class="btn btn-default" type="button" id="rmSingle1"><span class="glyphicon glyphicon-remove"></span></button>
-                                                    </div>
-                                                </div>
+                                            <div class="container-fluid" id="OptHolder">
                                             </div>
                                         </div>
                                         <div class="panel-footer">
-                                            <button class="btn btn-default" id="btnAddSingleOption" type="button">Add Option</button>
+                                            <button class="btn btn-default" id="btnAddOption" type="button">Add Option</button>
+                                            <button class="btn btn-default" id="btnClearOption" type="button">Clear Options</button>
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +114,7 @@
             </div>
         </div>
         <script>
-            var noOfSingleOptions = 1;
+            var noOfOptions = 0;
             var noOfMultiOptions = 1;
             var qnType = 0;
             // zero represents para type
@@ -152,64 +126,108 @@
                 });
             });
             jQuery(document).ready(function($) {
-                $("#btnAddSingleOption").click(function() {
-                    // adding a single option
-                    noOfSingleOptions += 1;
-                    var longString = '<div class="row" id="SingleOpt';
+                $("#btnAddOption").click(function() {
+                    // adding an option
+                    noOfOptions += 1;
+                    var longString = '<div class="row" id="Opt';
                     var longString1 = '">\
                         <div class="col-sm-1">';
                     var longString2 = '.</div>\
                         <div class="col-sm-9">\
-                            <input type="text" id="currentInputSingle';
+                            <input type="text" id="currentInput';
                     var longString3 = '" class="form-control" placeholder="Option">\
                         </div>\
                         <div class="col-sm-1">\
-                            <button class="btn btn-default" type="button" id="rmSingle';
+                            <button class="btn btn-default" type="button" id="rm';
                             var longString4 = '"><span class="glyphicon glyphicon-remove"></span></button>\
                         </div>\
                     </div>';
-                    var myString = longString + noOfSingleOptions + longString1 + "" + noOfSingleOptions + "" + longString2 + noOfSingleOptions + longString3 + noOfSingleOptions + longString4;
-                    document.getElementById("SingleOptHolder").innerHTML += myString;
+                    var myString = longString + noOfOptions + longString1 + "" + noOfOptions + "" + longString2 + noOfOptions + longString3 + noOfOptions + longString4;
+                    document.getElementById("OptHolder").innerHTML += myString;
+                    var sa1 = $('<div>').addClass('row').attr('id','Opt'+noOfOptions).css({'margin-top':'15px'});
+                    var sa2 = $('<div>').addClass('col-sm-1').html(noOfOptions+'.');
+                    var sa3 = $('<div>').addClass('col-sm-9');
+                    var sa4 = $('<input>').addClass('form-control').attr({placeholder:'Option',id:('currentInput'+noOfOptions),type:'text'});
+                    var sa5 = $('<div>').addClass('col-sm-1');
+                    var sa6 = $('<button>').addClass('btn btn-default').attr('type','button').on('click',function(e){
+                        $(e.target).parents('.row')[0].remove();
+                    });
+                    var sa7 = $('<span>').addClass('glyphicon glyphicon-remove');
+                    sa6.append(sa7);
+                    sa5.append(sa6);
+                    sa3.append(sa4);
+                    sa1.append(sa2).append(sa3);
+                    sa1.append(sa5);
+                    $('#OptHolder').append(sa1);
                 });
+                $("#btnClearOption").click(function($) {
+                    document.getElementById("OptHolder").innerHTML = "";
+                })
                 $("#btnAddMultiOption").click(function() {
                     // adding a multiple option
                     noOfMultiOptions += 1;
-                    var longString = '<div class="row" id="MultiOpt';
-                    var longString1 = '">\
-                        <div class="col-sm-1">';
-                    var longString2 = '.</div>\
-                        <div class="col-sm-9">\
-                            <input type="text" id="currentInputMulti';
-                    var longString3 = '" class="form-control" placeholder="Option">\
-                        </div>\
-                        <div class="col-sm-1">\
-                            <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>\
-                        </div>\
-                    </div>';
-                    var myString = longString + noOfMultiOptions + longString1 + "" + noOfMultiOptions + "" + longString2 + noOfMultiOptions + longString3;
-                    document.getElementById("MultiOptHolder").innerHTML += myString;
+                    // var longString = '<div class="row" id="MultiOpt';
+                    // var longString1 = '">\
+                    //     <div class="col-sm-1">';
+                    // var longString2 = '.</div>\
+                    //     <div class="col-sm-9">\
+                    //         <input type="text" id="currentInputMulti';
+                    //
+                    // var longString3 = '" class="form-control" placeholder="Option">\
+                    //     </div>\
+                    //     <div class="col-sm-1">\
+                    //         <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>\
+                    //     </div>\
+                    // </div>';
+                    // var myString = longString + noOfMultiOptions + longString1 + "" + noOfMultiOptions + "" + longString2 + noOfMultiOptions + longString3;
+                    // document.getElementById("MultiOptHolder").innerHTML += myString;
+
+                    var sa1 = $('<div>').addClass('row').attr('id','MultiOpt'+noOfMultiOptions).css({'margin-top':'15px'});
+                    var sa2 = $('<div>').addClass('col-sm-1').html(noOfMultiOptions+'.');
+                    var sa3 = $('<div>').addClass('col-sm-9');
+                    var sa4 = $('<input>').addClass('form-control').attr({placeholder:'Option',id:'currentInputMulti',type:'text'});
+                    var sa5 = $('<div>').addClass('col-sm-1');
+                    var sa6 = $('<button>').addClass('btn btn-default').attr('type','button').on('click',function(e){
+                        $(e.target).parents('.row')[0].remove();
+                    });
+                    var sa7 = $('<span>').addClass('glyphicon glyphicon-remove');
+                    sa6.append(sa7);
+                    sa5.append(sa6);
+                    sa3.append(sa4);
+                    sa1.append(sa2).append(sa3);
+                    sa1.append(sa5);
+                    $('#MultiOptHolder').append(sa1);
+                });
+                $("#AddQuestionToList").click(function() {
+                    // removeElement("#AddQuestionToList", $);
                 });
             });
+
+
+            function removeElement(elem_id, $) {
+                $(elem_id).remove();
+            }
+
             function choosePara() {
                 document.getElementById("currentChoice").innerHTML = "Paragraph";
                 document.getElementById("ParagraphTypeDiv").className = "col-sm-9 collapse in";
-                document.getElementById("SingleCorrectDiv").className = "col-sm-9 collapse";
-                document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse";
-                // qnType = 0;
+                document.getElementById("OptionsDiv").className = "col-sm-9 collapse";
+                // document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse";
+                qnType = 0;
             }
             function chooseMCQ() {
                 document.getElementById("currentChoice").innerHTML = "Single Correct";
                 document.getElementById("ParagraphTypeDiv").className = "col-sm-9 collapse";
-                document.getElementById("SingleCorrectDiv").className = "col-sm-9 collapse in";
-                document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse";
-                // qnType = 1;
+                document.getElementById("OptionsDiv").className = "col-sm-9 collapse in";
+                // document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse";
+                qnType = 1;
             }
             function chooseMulti() {
                 document.getElementById("currentChoice").innerHTML = "Multiple Correct";
                 document.getElementById("ParagraphTypeDiv").className = "col-sm-9 collapse";
-                document.getElementById("SingleCorrectDiv").className = "col-sm-9 collapse";
+                document.getElementById("OptionsDiv").className = "col-sm-9 collapse";
                 document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse in";
-                // qnType = 2;
+                qnType = 2;
             }
 
         </script>
