@@ -8,6 +8,7 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <style type="text/css" href="css/main.css"></style>
+        <script src="js/main.js"></script>
     </head>
     <body>
         <div class="page-header">
@@ -23,213 +24,80 @@
                         <a href="#" class="list-group-item">Profile <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
                         <a href="#" class="list-group-item">Preferences <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
                     </div>
-                    <div class="list-group">
-                        <li class="list-group-item">Creation Options</li>
-                        <a href="#" class="list-group-item active">Editing Mode <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
-                        <a href="#" class="list-group-item">Final View Mode <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
-                        <a href="#" class="list-group-item">Statistics <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
-                        <a href="#" class="list-group-item">Preferences <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
-                    </div>
                 </div>
                 <div class="col-sm-8">
-                    <div class="well well-lg" id="currentQuestion">
-                        <form class="form-horizontal">
-                            <div class="row">
-                                <div class="col-sm-9">
-                                    <div class="form-group">
-                                        <label for="currentInputQuestion" class="sr-only">Type Your Question</label>
-                                        <input type="text" id="currentInputQuestion" class="form-control" placeholder="Type Your Question">
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span id="currentChoice">Single Correct</span>
-                                        <span class="caret"></span></button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#" onclick="choosePara()">Paragraph</a></li>
-                                            <li><a href="#" onclick="chooseMCQ()">Single Correct</a></li>
-                                            <li><a href="#" onclick="chooseMulti()">Multiple Correct</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-9 collapse" id="ParagraphTypeDiv">
-                                    <div class="panel panel-default">
-                                        <div class="panel-body">
-                                            Subjective Answer.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 collapse in" id="OptionsDiv">
-                                    <div class="panel panel-default">
-                                        <div class="panel-body">
-                                            <div class="container-fluid" id="OptHolder">
+                    <p>
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#" class="CreationNav">Editing Mode</a></li>
+                        <li><a href="#" class="CreationNav">Final View Mode</a></li>
+                        <li><a href="#" class="CreationNav">Statistics</a></li>
+                        <li><a href="#" class="CreationNav">Preferences</a></li>
+                    </ul>
+                    </p>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="well well-lg" id="currentQuestion">
+                                    <form class="form-horizontal">
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                                <div class="form-group">
+                                                    <label for="currentInputQuestion" class="sr-only">Type Your Question</label>
+                                                    <input type="text" id="currentInputQuestion" class="form-control" placeholder="Type Your Question">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><span id="currentChoice">Single Correct</span>
+                                                    <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#" onclick="choosePara()">Paragraph</a></li>
+                                                        <li><a href="#" onclick="chooseMCQ()">Single Correct</a></li>
+                                                        <li><a href="#" onclick="chooseMulti()">Multiple Correct</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="panel-footer">
-                                            <button class="btn btn-default" id="btnAddOption" type="button">Add Option</button>
-                                            <button class="btn btn-default" id="btnClearOption" type="button">Clear Options</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9 collapse" id="MultipleCorrectDiv">
-                                    <div class="panel panel-default">
-                                        <div class="panel-body">
-                                            <div class="container-fluid" id="MultiOptHolder">
-                                                <div class="row" id="MultiOpt1">
-                                                    <div class="col-sm-1">
-                                                        1.
+                                        <div class="row">
+                                            <div class="col-sm-9 collapse" id="ParagraphTypeDiv">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        Subjective Answer.
                                                     </div>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" id="currentInputMulti1" class="form-control" placeholder="Option">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-9 collapse in" id="OptionsDiv">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="container-fluid" id="OptHolder">
+                                                        </div>
                                                     </div>
-                                                    <div class="col-sm-1">
-                                                        <button class="btn btn-default" type="button" id="rmMulti1"><span class="glyphicon glyphicon-remove"></span></button>
+                                                    <div class="panel-footer">
+                                                        <button class="btn btn-default" id="btnAddOption" type="button">Add Option</button>
+                                                        <button class="btn btn-default" id="btnClearOption" type="button">Clear Options</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="panel-footer">
-                                            <button class="btn btn-default" id="btnAddMultiOption" type="button">Add Option</button>
+                                        <div class="row">
+                                            <div class="col-sm-9">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <button class="btn btn-primary" type="button" id="AddQuestionToList">Include Question</button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
+                                </div>
+                                <div class="list-group" id="preparedQuestions">
+                                    <a href="#" class="list-group-item">First item</a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-9">
-                                </div>
-                                <div class="col-sm-3">
-                                    <button class="btn btn-primary" type="button" id="AddQuestionToList">Include Question</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
-                    <div class="list-group" id="preparedQuestions">
-                        <a href="#" class="list-group-item">First item</a>
-                        <a href="#" class="list-group-item">Second item</a>
-                        <a href="#" class="list-group-item">Third item</a>
-                    </ul>
                 </div>
             </div>
         </div>
         <script>
-            var noOfOptions = 0;
-            var noOfMultiOptions = 1;
-            var qnType = 0;
-            // zero represents para type
-            // one represents single choice type
-            // two repesents multi choice type
-            jQuery(document).ready(function($) {
-                $(".clickable-row").click(function() {
-                    window.document.location = $(this).data("href");
-                });
-            });
-            jQuery(document).ready(function($) {
-                $("#btnAddOption").click(function() {
-                    // adding an option
-                    noOfOptions += 1;
-                    var longString = '<div class="row" id="Opt';
-                    var longString1 = '">\
-                        <div class="col-sm-1">';
-                    var longString2 = '.</div>\
-                        <div class="col-sm-9">\
-                            <input type="text" id="currentInput';
-                    var longString3 = '" class="form-control" placeholder="Option">\
-                        </div>\
-                        <div class="col-sm-1">\
-                            <button class="btn btn-default" type="button" id="rm';
-                            var longString4 = '"><span class="glyphicon glyphicon-remove"></span></button>\
-                        </div>\
-                    </div>';
-                    var myString = longString + noOfOptions + longString1 + "" + noOfOptions + "" + longString2 + noOfOptions + longString3 + noOfOptions + longString4;
-                    document.getElementById("OptHolder").innerHTML += myString;
-                    var sa1 = $('<div>').addClass('row').attr('id','Opt'+noOfOptions).css({'margin-top':'15px'});
-                    var sa2 = $('<div>').addClass('col-sm-1').html(noOfOptions+'.');
-                    var sa3 = $('<div>').addClass('col-sm-9');
-                    var sa4 = $('<input>').addClass('form-control').attr({placeholder:'Option',id:('currentInput'+noOfOptions),type:'text'});
-                    var sa5 = $('<div>').addClass('col-sm-1');
-                    var sa6 = $('<button>').addClass('btn btn-default').attr('type','button').on('click',function(e){
-                        $(e.target).parents('.row')[0].remove();
-                    });
-                    var sa7 = $('<span>').addClass('glyphicon glyphicon-remove');
-                    sa6.append(sa7);
-                    sa5.append(sa6);
-                    sa3.append(sa4);
-                    sa1.append(sa2).append(sa3);
-                    sa1.append(sa5);
-                    $('#OptHolder').append(sa1);
-                });
-                $("#btnClearOption").click(function($) {
-                    document.getElementById("OptHolder").innerHTML = "";
-                })
-                $("#btnAddMultiOption").click(function() {
-                    // adding a multiple option
-                    noOfMultiOptions += 1;
-                    // var longString = '<div class="row" id="MultiOpt';
-                    // var longString1 = '">\
-                    //     <div class="col-sm-1">';
-                    // var longString2 = '.</div>\
-                    //     <div class="col-sm-9">\
-                    //         <input type="text" id="currentInputMulti';
-                    //
-                    // var longString3 = '" class="form-control" placeholder="Option">\
-                    //     </div>\
-                    //     <div class="col-sm-1">\
-                    //         <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>\
-                    //     </div>\
-                    // </div>';
-                    // var myString = longString + noOfMultiOptions + longString1 + "" + noOfMultiOptions + "" + longString2 + noOfMultiOptions + longString3;
-                    // document.getElementById("MultiOptHolder").innerHTML += myString;
-
-                    var sa1 = $('<div>').addClass('row').attr('id','MultiOpt'+noOfMultiOptions).css({'margin-top':'15px'});
-                    var sa2 = $('<div>').addClass('col-sm-1').html(noOfMultiOptions+'.');
-                    var sa3 = $('<div>').addClass('col-sm-9');
-                    var sa4 = $('<input>').addClass('form-control').attr({placeholder:'Option',id:'currentInputMulti',type:'text'});
-                    var sa5 = $('<div>').addClass('col-sm-1');
-                    var sa6 = $('<button>').addClass('btn btn-default').attr('type','button').on('click',function(e){
-                        $(e.target).parents('.row')[0].remove();
-                    });
-                    var sa7 = $('<span>').addClass('glyphicon glyphicon-remove');
-                    sa6.append(sa7);
-                    sa5.append(sa6);
-                    sa3.append(sa4);
-                    sa1.append(sa2).append(sa3);
-                    sa1.append(sa5);
-                    $('#MultiOptHolder').append(sa1);
-                });
-                $("#AddQuestionToList").click(function() {
-                    // removeElement("#AddQuestionToList", $);
-                });
-            });
-
-
-            function removeElement(elem_id, $) {
-                $(elem_id).remove();
-            }
-
-            function choosePara() {
-                document.getElementById("currentChoice").innerHTML = "Paragraph";
-                document.getElementById("ParagraphTypeDiv").className = "col-sm-9 collapse in";
-                document.getElementById("OptionsDiv").className = "col-sm-9 collapse";
-                // document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse";
-                qnType = 0;
-            }
-            function chooseMCQ() {
-                document.getElementById("currentChoice").innerHTML = "Single Correct";
-                document.getElementById("ParagraphTypeDiv").className = "col-sm-9 collapse";
-                document.getElementById("OptionsDiv").className = "col-sm-9 collapse in";
-                // document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse";
-                qnType = 1;
-            }
-            function chooseMulti() {
-                document.getElementById("currentChoice").innerHTML = "Multiple Correct";
-                document.getElementById("ParagraphTypeDiv").className = "col-sm-9 collapse";
-                document.getElementById("OptionsDiv").className = "col-sm-9 collapse";
-                document.getElementById("MultipleCorrectDiv").className = "col-sm-9 collapse in";
-                qnType = 2;
-            }
-
         </script>
     </body>
 </html>
