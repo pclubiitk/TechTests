@@ -42,8 +42,8 @@
                                         <div class="row">
                                             <div class="col-sm-9">
                                                 <div class="form-group">
-                                                    <label for="currentInputQuestion" class="sr-only">Type Your Question</label>
-                                                    <input type="text" id="currentInputQuestion" class="form-control" placeholder="Type Your Question">
+                                                    <label for="foo" class="sr-only">Type Your Question</label>
+                                                    <input type="text" id="foo" class="form-control" placeholder="Type Your Question">
                                                 </div>
                                             </div>
                                             <div class="col-sm-3">
@@ -80,16 +80,31 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                             </div>
-                                            <div class="col-sm-3">
-                                                <button class="btn btn-primary" type="button" id="AddQuestionToList">Include Question</button>
+                                            <div class="col-xs-5">
+                                                <button class="btn btn-primary" type="button" id="btnAddQuestion">Include Question</button>
+                                                <button class="btn btn-primary" type="button" id="btnResetQuestion">Reset Question</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="list-group" id="preparedQuestions">
-                                    <a href="#" class="list-group-item">First item</a>
+                                    <a href="#" class="list-group-item">
+                                        <dl>
+                                            <dt>
+                                                Q. Question details: This is a very long question. I only wanted to see how much it can stretch. What about you?
+                                            </dt>
+                                            <dd>
+                                                <em>Multiple Options Correct</em>
+                                                <ul>
+                                                    <li>opt1</li>
+                                                    <li>opt2</li>
+                                                    <li>opt3</li>
+                                                </ul>
+                                            </dd>
+                                        </dl>
+                                    </a>
                                 </div>
                             </div>
                         </div>
