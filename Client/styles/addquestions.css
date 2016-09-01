@@ -1,0 +1,9 @@
+header {
+  font-size:2em;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.strong {
+  font-weight: bold;
+}
