@@ -59,10 +59,21 @@ std::string exec(const std::string cmd) {
   return vals;
 }
 
+// trim from right
+inline std::string& trimSpace(std::string& s, const char* t = " \t") {
+  s.erase(s.find_last_not_of(t) + 1);
+  return s;
+}
+
+// trim from right newline
+inline std::string& trim(std::string& s, const char* t = "\n\r") {
+  s.erase(s.find_last_not_of(t) + 1);
+  return s;
+}
+
 // Compare the outputs
 bool compareOutputs(std::string out1, std::string out2) {
-  // TODO(yashsriv): Codechef style checking
-  return !out1.compare(out2);
+  return !(trim(out1).compare(trim(out2)));
 }
 
 // Generate the sh file for running the commands in arg1
@@ -91,7 +102,8 @@ std::string parseOutput(std::string lastcommand, std::string output, std::string
 
   while (getline(outputstream, line)) {
     if (found) {
-      our_output += line.substr(8) + "\n";
+      std::string temp = line.substr(8);
+      our_output += trimSpace(temp) + "\n";
     }
     if (!line.substr(8).substr(0, 3).compare("###")) {
       if (!line.compare("stdout: ### " + lastcommand + " ###")) {
@@ -113,7 +125,7 @@ std::string readFile(std::string filename) {
   std::string output, line;
 
   while (getline(file, line)) {
-    output += line + "\n";
+    output += trimSpace(line) + "\n";
   }
   file.close();
 
