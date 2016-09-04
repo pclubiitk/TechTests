@@ -5,6 +5,8 @@
 
 #include "libs/pstream.h"
 
+std::string DELIM = "###";
+
 // Function to return stdout + stderr
 std::string exec(const std::string);
 // Compare the outputs
@@ -25,7 +27,8 @@ int main(int argc, char** argv) {
   // Run and delete temporary file
   exec("chmod +x " + shfilename);
 
-  output = exec(shfilename);
+  // Redirect error to output too
+  output = exec(shfilename + " 2>&1");
 
   exec("rm " + shfilename);
 
@@ -44,16 +47,9 @@ std::string exec(const std::string cmd) {
 
   std::string line, vals = "";
 
-  // read child's stderr
-  while (std::getline(proc.err(), line)) {
-    vals += "stderr: " + line + '\n';
-  }
-
-  proc.clear();
-
   // read child's stdout
   while (std::getline(proc.out(), line)) {
-    vals += "stdout: " + line + '\n';
+    vals += line + '\n';
   }
 
   return vals;
@@ -82,10 +78,12 @@ std::string generateShFile(std::string cmdfilename, std::string shfilename) {
   std::ofstream shfile(shfilename);
   std::string line, lastcommand;
 
+  int i = 1;
   while (getline(cmdfile, line)) {
-    shfile << "echo \"### " << line << " ###\"\n";
+    shfile << "echo \"" << DELIM << " cmd " << i << " : " << line << " " << DELIM << "\"\n";
     shfile << line << "\n";
-    lastcommand = line;
+    lastcommand = DELIM + " cmd " + std::to_string(i) + " : " + line + " " + DELIM;
+    i++;
   }
   shfile.close();
   cmdfile.close();
@@ -101,16 +99,37 @@ std::string parseOutput(std::string lastcommand, std::string output, std::string
   bool found = false;
 
   while (getline(outputstream, line)) {
+    bool found_noendl =false;
     if (found) {
-      std::string temp = line.substr(8);
+      std::string temp = line;
       our_output += trimSpace(temp) + "\n";
     }
-    if (!line.substr(8).substr(0, 3).compare("###")) {
-      if (!line.compare("stdout: ### " + lastcommand + " ###")) {
+    if (line.length() > 3 && !line.substr(0, 3).compare(DELIM)) {
+      if (!line.compare(lastcommand)) {
         found = true;
       }
-    } else {
       outfile << line + "\n";
+    } else if (line.length() > 0){
+      outfile << line[0];
+      std::string newline = "";
+      for(int i = 1; i < line.length() - 3; i++) {
+        if(!line.substr(i, 3).compare(DELIM)) {
+          outfile << "%\n" << line[i];
+          found_noendl = true;
+        } else {
+          outfile << line[i];
+        }
+        if (found_noendl) {
+          newline += line[i];
+        }
+      }
+      if (found_noendl) {
+        newline += line.substr(line.length() - 3);
+        if (!newline.compare(lastcommand)) {
+          found = true;
+        }
+      }
+      outfile << line.substr(line.length() -3) +"\n";
     }
   }
   // Print output to outfile
