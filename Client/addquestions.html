@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create a Test | TechTests</title>
+  <meta charset="UTF-8">
+  <!-- Load styles and frameworks -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <link rel="stylesheet" href="styles/addquestions.css">
+  <!--Load model, initialize stuff -->
+  <script type="text/javascript" src="js/Question.js"></script>
+  <script src="js/addquestions_onload.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  var questions = []; //Will store the list of all questions in the end.
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="row">TechTests Create a Test</div>
+    </header>
+    <div class="row">
+      <main>
+        <div id="createdQuestions">
+          <ul id="qList" class="collapsible"></ul>
+          </div>
+          <div class="center">
+            <a id="createQuestion" href="#createQModal" class="waves-effect waves-light btn modal-trigger">Create a Question</a>
+            <a id="doneWith" class="waves-effect waves-dark blue btn modal-trigger">Done Making Quiz</a>
+          </div>
+
+          <!-- invisible till the user wants to create a question -->
+          <div id="createQModal" class="modal">
+            <div class="modal-content">
+              <h4>Question Editor</h4>
+              <form name="questionCreator" id="questionCreator">
+                <div class="input-field col s6">
+                  <select name="questionType" id="questionType">
+                    <option value="singleans">Single Answer</option>
+                    <option value="multians">Multiple Answer</option>
+                    <option value="subjective">Subjective</option>
+                    <option value="codebased">Code Based</option>
+                    <label>Type</label>
+                  </select>
+                </div>
+                <div class="col s6 input-field center" id="optionAdditionPanel">
+                  <input name="optionAddition" type="checkbox" id="optionAddition" />
+                  <label for="optionAddition">Can options be added?</label>
+                </div>
+                <div class="input-field col s12">
+                  <textarea id="questionStatement" name="questionStatement" class="materialize-textarea"></textarea>
+                  <label for="questionStatement">Question</label>
+                </div>
+                <div class="input-field col s12">
+                  <ul class="collection with-header" id="optionList">
+                    <li class="collection-header">Options</li>
+                  </ul>
+                </div>
+                <div class="col s12">
+                  <input type="text" id="newOption" name="newOption" placeholder="Add Option (Press Enter to Add)">
+                </div>
+                <div class="col s12 center">
+                  <a class="waves-effect waves-light btn" id="addButton">Add Question</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Load JQuery and materialize -->
+
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+      <script>
+      document.body.onload = loaded;
+
+      </script>
+    </div>
+  </body>
+  </html>
