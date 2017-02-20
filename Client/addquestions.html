@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <style>
+  header {
+    font-size:2em;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  </style>
+  <script type="text/javascript" src="js/Question.js"></script>
+  <script>
+  var questions = []; //Will store the list of all questions in the end.
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="row">TechTests Create a Test</div>
+    </header>
+    <div class="row">
+      <main>
+        <div id="createdQuestions">
+          <ul id="qList" class="">
+          </div>
+          <a id="createQuestion" href="#createQModal" class="waves-effect waves-light btn modal-trigger">Create a Question</a>
+          <div id="createQModal" class="modal">
+            <div class="modal-content">
+              <h4>Question Editor</h4>
+              <form name="questionCreator" id="questionCreator">
+                <div class="input-field col s6">
+                  <select name="questionType" id="questionType">
+                    <option value="singleans">Single Answer</option>
+                    <option value="multians">Multiple Answer</option>
+                    <option value="subjective">Subjective</option>
+                    <option value="codebased">Code Based</option>
+                    <label>Type</label>
+                  </select>
+                </div>
+                <div class="col s6 input-field center">
+                  <input name="optionAddition" type="checkbox" id="optionAddition" />
+                  <label for="optionAddition">Options can be added</label>
+                </div>
+                <div class="input-field col s12">
+                  <textarea id="questionStatement" name="questionStatement" class="materialize-textarea"></textarea>
+                  <label for="questionStatement">Question</label>
+                </div>
+                <div class="input-field col s12">
+                  <ul class="collection with-header" id="optionList">
+                    <li class="collection-header">Options</li>
+                    <li class="collection-item">Sample answer 1<a href="#!" class="secondary-content" id="th">remove</a></li>
+                  </ul>
+                </div>
+                <div class="col s12">
+                  <input type="text" id="newOption" name="newOption" placeholder="Add Option">
+                </div>
+                <div class="col s12 center">
+                  <a class="waves-effect waves-light btn" id="addButton">Add</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </main>
+      </div>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+      <script>
+      $(document).ready(function(){
+        $('.modal-trigger').leanModal();
+      });
+
+      $(document).ready(function() {
+        $('select').material_select();
+      });
+
+      document.body.onload = function() {
+        document.getElementById("addButton").onclick = function() {
+          var q = document.getElementById("newOption");
+          var op = document.createElement("li");
+          op.className = "collection-item";
+          op.appendChild(document.createTextNode(q.value));
+          document.getElementById("optionList").appendChild(op);
+          q.value="";
+        };
+
+        $(document).click(function(event) {
+          var text = $(event.target);
+          console.log(text);
+        });
+      };
+
+
+      </script>
+    </div>
+  </body>
+  </html>
